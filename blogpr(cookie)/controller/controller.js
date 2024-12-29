@@ -5,10 +5,17 @@ const Ragistarpage = (req, res) => {
     return res.render('ragistar')
 }
 const loginpage = (req, res) => {
-    if(req.cookies['auth']){
-        return res.redirect('/viewblog');
+   try{
+        if(req.cookie.admin == undefined){
+            return res.render('login');
+        }
+        else{
+            return res.redirect('/viewblog');
+        }
+    }catch(err){
+        return res.render('login');
     }
-    return res.render('login')
+    
 }
 
 const Ragistarusers = async (req, res) => {
